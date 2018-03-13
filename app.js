@@ -1,27 +1,11 @@
 const http = require('http');
 const port = 3000;
+const express = require('express');
+const app = express();
+var path = require('path');
 
-var runner = require("child_process");
-var phpScriptPath = "./test.php";
-var argsString = "";
+app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/builds/index.html')));
 
-const requestHandler = (request, response) => {
-  console.log(request.url)
-  response.end(builds/comedians.html)
-};
-
-const server = http.createServer(requestHandler);
-
-server.listen(port, (err) => {
-  if (err) {
-    return console.log('something bad happened', err)
-  }
-
-  console.log(`server is listening on ${port}`)
-
-  runner.exec("php " + "test.php", function(err, phpResponse, stderr) {
-    console.log("Runner function called on " + phpScriptPath);
-
-    console.log( phpResponse );
-  });
-})
+app.listen(3000, function(){
+	console.log('Listening on port 3000!');
+});
